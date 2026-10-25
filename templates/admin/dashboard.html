@@ -1,0 +1,14 @@
+{% extends "admin/base_admin.html" %}{% block body %}
+<h1>Dashboard <span class="live" id="live">● live</span></h1><div class="cards" id="cards"></div>
+<div class="two"><div class="card"><h3>Orders by status</h3><div id="bars"></div></div><div class="card"><h3>Worker load (active jobs)</h3><div id="load"></div></div></div>
+<h3>Recent orders</h3><table><thead><tr><th>#</th><th>Customer</th><th>Product</th><th>Qty</th><th>Status</th><th>Worker</th></tr></thead><tbody id="rows"></tbody></table>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function tick(){try{const d=await (await fetch('/admin/api/stats')).json();
+cards.innerHTML=[['Total orders',d.total],['Today',d.today],['New (unassigned)',d.by_status['New']],['Dispatched',d.by_status['Dispatched']],['Active workers',d.workers],['Products',d.products],['Enquiries',d.enquiries]].map(x=>`<div class="card"><div class="stat">${x[1]}</div>${x[0]}</div>`).join('');
+const m=Math.max(1,...Object.values(d.by_status));bars.innerHTML=Object.entries(d.by_status).map(([k,v])=>`<p style="margin:10px 0 4px">${k} <b>${v}</b></p><div class="bar" style="width:${v/m*100}%"></div>`).join('');
+load.innerHTML=d.load.map(w=>`<p>${esc(w.name)}: <b>${w.active}</b></p>`).join('')||'No workers yet';
+rows.innerHTML=d.recent.map(o=>`<tr><td>${o.id}</td><td>${esc(o.customer)}</td><td>${esc(o.product)}</td><td>${o.quantity}</td><td><span class="tag">${o.status}</span></td><td>${esc(o.worker)||'-'}</td></tr>`).join('');
+live.textContent='● live '+new Date().toLocaleTimeString()}catch(e){live.textContent='● offline'}}
+tick();setInterval(tick,5000);
+</script>{% endblock %}

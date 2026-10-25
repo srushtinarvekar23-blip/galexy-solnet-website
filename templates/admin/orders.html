@@ -1,0 +1,7 @@
+{% extends "admin/base_admin.html" %}{% block body %}<h1>Orders</h1>
+<p class="filter"><a href="{{ url_for('orders') }}">All</a>{% for s in statuses %}<a href="{{ url_for('orders', status=s) }}">{{ s }}</a>{% endfor %}</p>
+<table><thead><tr><th>#</th><th>Customer</th><th>Contact</th><th>Product</th><th>Qty</th><th>Details</th><th>Assign / status</th><th></th></tr></thead><tbody>
+{% for o in orders %}<tr><td>{{ o.id }}</td><td>{{ o.customer }}</td><td>{{ o.phone }}<br>{{ o.email }}</td><td>{{ o.product }}</td><td>{{ o.quantity }}</td><td>{{ o.details }}</td>
+<td><form class="inline" method="post" action="{{ url_for('update_order', oid=o.id) }}"><select name="worker_id"><option value="">Unassigned</option>{% for w in workers %}<option value="{{ w.id }}" {{ 'selected' if w.id==o.worker_id }}>{{ w.name }}</option>{% endfor %}</select>
+<select name="status">{% for s in statuses %}<option {{ 'selected' if s==o.status }}>{{ s }}</option>{% endfor %}</select><button>Save</button></form></td>
+<td><form method="post" action="{{ url_for('delete_order', oid=o.id) }}" onsubmit="return confirm('Delete order?')"><button class="red">Del</button></form></td></tr>{% else %}<tr><td colspan="8">No orders yet.</td></tr>{% endfor %}</tbody></table>{% endblock %}

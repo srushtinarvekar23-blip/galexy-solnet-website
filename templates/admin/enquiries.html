@@ -1,0 +1,1 @@
+{% extends "admin/base_admin.html" %}{% block body %}<h1>Enquiries</h1><table><tr><th>When</th><th>Name</th><th>Phone</th><th>Message</th></tr>{% for r in rows %}<tr><td>{{ r.created }}</td><td>{{ r.name }}</td><td>{{ r.phone }}</td><td>{{ r.message }}</td></tr>{% else %}<tr><td colspan="4">No enquiries yet.</td></tr>{% endfor %}</table>{% endblock %}

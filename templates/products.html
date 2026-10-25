@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Products | Galexy Sonnet{% endblock %}{% block content %}
+<section class="phead"><div class="container"><div class="eyebrow">The catalogue</div><h1>Our <em>products.</em></h1></div></section>
+<section class="sec"><div class="container"><div class="tabs"><a class="{{ '' if current else 'on' }}" href="{{ url_for('products') }}">All</a>{% for c in categories %}<a class="{{ 'on' if current==c }}" href="{{ url_for('products', category=c) }}">{{ c }}</a>{% endfor %}</div>
+{% for c, items in groups.items() %}{% if items %}<div class="cat"><h2>{{ c }}</h2></div><div class="grid">{% for p in items %}<article class="card reveal"><a class="img" href="{{ url_for('order') }}?product={{ p.name }}"><img src="{{ p.image }}" alt="{{ p.name }}" loading="lazy"><span class="tag">{{ p.code }}</span></a>
+<div class="body"><h3>{{ p.name }}</h3><p>{{ p.summary }}</p><a class="go" href="{{ url_for('order') }}?product={{ p.name }}">Request / order <span>→</span></a></div></article>{% endfor %}</div>{% endif %}{% endfor %}</div></section>
+{% endblock %}

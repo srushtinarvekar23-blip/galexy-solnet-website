@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}<section class="phead"><div class="container"><div class="eyebrow">Order / enquiry</div><h1>Tell us what<br><em>you need.</em></h1></div></section>
+<section class="sec"><div class="container split" style="align-items:start">
+<div class="card" style="max-width:560px"><div class="img"><img id="pimg" src="" alt=""></div><div class="body"><span class="eyebrow" id="pcode" style="margin-bottom:8px"></span><h3 id="pname"></h3><p id="psum" style="min-height:0"></p></div></div>
+<form method="post" class="form">
+<select name="product" id="psel">{% for p in products %}<option value="{{ p.name }}" {{ 'selected' if p.name==selected }}>{{ p.name }}</option>{% endfor %}</select>
+<input name="customer" placeholder="Name / Company" required><input name="phone" placeholder="Phone" required><input name="email" placeholder="Email">
+<input name="quantity" type="number" min="1" value="1"><textarea name="details" rows="4" placeholder="Size, load, requirements..."></textarea><button class="btn">Submit order ↗</button></form></div></section>
+<script>
+const P={{ products|tojson }},sel=document.getElementById('psel');
+function show(){const p=P.find(x=>x.name===sel.value)||P[0];if(!p)return;pimg.src=p.image;pimg.alt=p.name;pname.textContent=p.name;pcode.textContent=p.code;psum.textContent=p.summary}
+sel.addEventListener('change',show);show();
+</script>{% endblock %}

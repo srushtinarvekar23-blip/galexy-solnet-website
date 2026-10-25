@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}About | Galexy Sonnet{% endblock %}{% block content %}
+<section class="phead"><div class="container"><div class="eyebrow">About us</div><h1>Engineering you<br>can <em>rely on.</em></h1></div></section>
+<section class="sec"><div class="container"><div class="facts">
+<div class="fact reveal"><span>ESTABLISHED</span><b>[Year]</b><p>Replace with the year Galexy Sonnet was founded.</p></div>
+<div class="fact reveal"><span>LOCATION</span><b>[City, State]</b><p>Replace with the company address.</p></div>
+<div class="fact reveal"><span>PROJECTS DELIVERED</span><b>[100+]</b><p>Replace with your count.</p></div></div>
+<div class="cat"><h2>Work till now</h2></div><p style="color:var(--mut);max-width:560px">Companies we have supplied enclosure and rack solutions to, from our start until today.</p>
+<div class="clients">{% for c in ['Client Company 1','Client Company 2','Client Company 3','Client Company 4','Client Company 5','Client Company 6'] %}<div class="client reveal">{{ c }}</div>{% endfor %}</div></div></section>
+<section class="sec alt"><div class="container split"><div><div class="eyebrow">Contact</div><h2>Talk to <em>us.</em></h2></div>
+<form method="post" action="{{ url_for('contact') }}" class="form"><input name="name" placeholder="Your name" required><input name="phone" placeholder="Phone" required><textarea name="message" placeholder="How can we help?" required rows="4"></textarea><button class="btn">Send message ↗</button></form></div></section>
+{% endblock %}

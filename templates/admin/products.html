@@ -1,0 +1,3 @@
+{% extends "admin/base_admin.html" %}{% block body %}<h1>Products <a class="btn lime" href="{{ url_for('product_form') }}" style="font-size:13px;margin-left:12px">+ Add product</a></h1>
+<table><tr><th>Image</th><th>Name</th><th>Category</th><th>Code</th><th>Shown</th><th></th></tr>{% for p in rows %}<tr><td><img class="thumb" src="{{ p.image }}"></td><td>{{ p.name }}</td><td>{{ p.category }}</td><td>{{ p.code }}</td><td>{{ 'Yes' if p.published else 'Hidden' }}</td>
+<td style="display:flex;gap:6px"><a class="btn" href="{{ url_for('product_form', pid=p.id) }}">Edit</a><form method="post" action="{{ url_for('product_delete', pid=p.id) }}" onsubmit="return confirm('Delete product?')"><button class="red">Del</button></form></td></tr>{% endfor %}</table>{% endblock %}

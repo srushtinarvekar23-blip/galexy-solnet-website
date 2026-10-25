@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block content %}
+<section class="hero" id="carousel">
+ {% for n,d,img in sliders %}
+ <div class="hslide {{ 'active' if loop.first }}"><div class="container hslide-in">
+  <div class="ghost-num">{{ '%02d'|format(loop.index) }}</div>
+  <div class="hslide-text"><div class="kicker">OUR PRODUCTS</div><h1>{{ n }}</h1><p>{{ d }}</p>
+   <a class="btn" href="{{ url_for('order') }}?product={{ n }}">Enquire now ↗</a> <a class="btn ghost" href="{{ url_for('products') }}">View catalogue</a></div>
+  <div class="hframe"><img src="{{ img }}" alt="{{ n }}" onerror="this.onerror=null;this.src='/static/products/part-rack.jpg'"></div></div></div>
+ {% endfor %}
+ <div class="container hctl"><button class="arrow prev" aria-label="Previous">←</button><div class="dots">{% for n,d,img in sliders %}<button class="dot {{ 'active' if loop.first }}" aria-label="{{ n }}"><span></span></button>{% endfor %}</div>
+  <div class="counter"><b>01</b> / {{ '%02d'|format(sliders|length) }}</div><button class="arrow next" aria-label="Next">→</button></div>
+</section>
+<div class="marquee"><div class="mtrack">{% for i in range(2) %}{% for n,d,img in sliders %}<span>{{ n }}</span><i>◆</i>{% endfor %}{% endfor %}</div></div>
+<section class="sec"><div class="container"><div class="sechead"><div><div class="eyebrow">Our products</div><h2>Pick the one<br>that <em>fits your need.</em></h2></div></div>
+<div class="grid">{% for n,d,img in sliders %}<article class="card reveal"><a class="img" href="{{ url_for('order') }}?product={{ n }}"><img src="{{ img }}" alt="{{ n }}" loading="lazy" onerror="this.onerror=null;this.src='/static/products/part-rack.jpg'"><span class="num">{{ '%02d'|format(loop.index) }}</span><span class="tag">Product</span></a>
+<div class="body"><h3>{{ n }}</h3><p>{{ d }}</p><div class="go">Enquire <span>→</span></div></div></article>{% endfor %}</div></div></section>
+{% endblock %}
