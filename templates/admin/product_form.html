@@ -1,5 +1,5 @@
 {% extends "admin/base_admin.html" %}{% block body %}<h1>{{ 'Edit' if p else 'Add' }} product</h1><div class="card formcard"><form method="post" enctype="multipart/form-data">
-<label>Category</label><select name="category">{% for c in ['Part Rack','CAC / HAC','Cage','ODO','Customize Solutions'] %}<option {{ 'selected' if p and p.category==c }}>{{ c }}</option>{% endfor %}</select>
+<label>Category</label><select name="category">{% for c in ['Smart Rack','CAC / HAC','Cage','ODU','Customize Solutions'] %}<option {{ 'selected' if p and p.category==c }}>{{ c }}</option>{% endfor %}</select>
 <label>Name</label><input name="name" value="{{ p.name if p }}" required><label>Code</label><input name="code" value="{{ p.code if p }}" required>
 <label>Summary</label><textarea name="summary" rows="3" required>{{ p.summary if p }}</textarea>
 {% if p %}<img class="thumb" style="width:140px;height:96px" src="{{ p.image }}"><br><br>{% endif %}

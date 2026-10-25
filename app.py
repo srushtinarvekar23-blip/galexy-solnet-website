@@ -20,16 +20,16 @@ app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-me")
 app.config["MAX_CONTENT_LENGTH"] = 15 * 1024 * 1024
 
 CATEGORIES = [
-    "Part Rack",
+    "Smart Rack",
     "CAC / HAC",
     "Cage",
-    "ODO",
+    "ODU",
     "Customize Solutions"
 ]
 
 SEED = [
     (
-        "Part Rack", "Part Rack", "GS-PR-100",
+        "Smart Rack", "Smart Rack", "GS-PR-100",
         "Modular racks that keep parts and components organised, easy to find and quick to access on the shop floor.",
         "/static/products/part-rack.jpg"
     ),
@@ -54,7 +54,7 @@ SEED = [
         "/static/products/opac-cage.jpg"
     ),
     (
-        "ODO", "ODO", "GS-OD-400",
+        "ODU", "ODU", "GS-OD-400",
         "Outdoor enclosure built for rain, dust and sun. Protects electrical and network equipment in harsh conditions.",
         "/static/products/odo.jpg"
     ),
